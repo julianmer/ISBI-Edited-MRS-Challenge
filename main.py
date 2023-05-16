@@ -246,7 +246,7 @@ class Pipeline():
             except: print('bfloat16 for matmul not supported')
             accelerator = 'gpu'
             devices = [config.selection]   # select gpu by idx or multiple gpus by range or idxs
-        else: accelerator, devices = None, None
+        else: accelerator, devices = 'cpu', 1   # devices becomes number of processes for cpu
 
         # load model...
         if config.load_model:
@@ -432,24 +432,6 @@ class Framework(pl.LightningModule):
         np_y_test = y.float().cpu().detach().numpy()
         np_ppm = ppm.float().cpu().detach().numpy()
         model_metrics = calculate_metrics(np_pred, np_y_test, np_ppm)
-
-        # visulize predictions, ground truth, and residuals in same plot with residual pushed up
-        if True:
-            max_ind = np.amax(np.where(np_ppm[0] >= -5))
-            min_ind = np.amin(np.where(np_ppm[0] <= 10))
-
-            import matplotlib.pyplot as plt
-            fig, ax = plt.subplots(1, 1, figsize=(8, 4))
-            ax.plot(np_ppm[0, min_ind:max_ind], np_pred[0, min_ind:max_ind], label='pred')
-            ax.plot(np_ppm[0, min_ind:max_ind], np_y_test[0, min_ind:max_ind], label='gt')
-            ax.plot(np_ppm[0, min_ind:max_ind], np_pred[0, min_ind:max_ind] - np_y_test[0, min_ind:max_ind] + 0.3, 'r', label='residual')
-            ax.legend()
-
-            # have axis go from 4 to 2.5
-            ax.invert_xaxis()
-
-            plt.show()
-            stop
 
         for key, value in model_metrics.items():
             print(f"{self.identifier + key}: {value}")
