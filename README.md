@@ -1,5 +1,7 @@
 # A DEEP LEARNING APPROACH UTILIZING COVARIANCE MATRIX ANALYSIS FOR THE ISBI EDITED MRS RECONSTRUCTION CHALLENGE
 
+[A Deep Learning Approach Utilizing Covariance Matrix Analysis for the ISBI Edited MRS Reconstruction Challenge](https://arxiv.org/abs/2306.02984)
+
 ## Abstract
 
 Edited magnetic resonance spectroscopy (MRS) provides a non-invasive method for investigating low concentration metabolites, such as γ-aminobutyric acid (GABA). The ISBI Edited MRS Reconstruction Challenge aims at accelerating edited-MRS scans through machine learning models that reconstruct high-quality spectra using four times less data than standard scans. It is composed of three tracks: simulated data, single-vendor, and multi-vendor in-vivo data, each with edited ON and OFF spectra from GABA-edited MEGA-PRESS scans.
